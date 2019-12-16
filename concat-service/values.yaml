@@ -4,8 +4,8 @@ route:
 backend:
   replicaCount: 1
   appPort: 8080
-  livenessProbePath: api/actuator/health
-  readinessProbePath: api/actuator/health
+  livenessProbePath: actuator/health
+  readinessProbePath: actuator/health
   image:
     repository: joachimprinzbach/concat-service
     tag: latest
