@@ -25,6 +25,9 @@ spec:
         - name: {{ .Chart.Name }}
           image: "{{ .Values.backend.image.repository }}:{{ .Values.backend.image.tag }}"
           imagePullPolicy: {{ .Values.backend.image.pullPolicy }}
+          env:
+            - name: CONCAT_SERVICE_URL
+              value: {{ .Values.backend.concatUrl }}
           ports:
             - containerPort: {{ .Values.backend.appPort }}
               protocol: TCP
