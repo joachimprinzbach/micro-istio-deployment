@@ -2,6 +2,7 @@ route:
   enabled: true
   host: greeting-service.apps.baloise.dev
 backend:
+  concatUrl: http://concat-service-backend.concat-service.svc/concat
   replicaCount: 1
   appPort: 8080
   livenessProbePath: actuator/health
