@@ -1,56 +1,58 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ template "app.fullname" . }}-backend
+  name: {{ template "app.fullname" . }}
   labels:
-    app: {{ template "app.name" . }}-backend
+    app: {{ template "app.name" . }}
     chart: {{ template "app.chart" . }}
     release: {{ .Release.Name }}
     heritage: {{ .Release.Service }}
 spec:
-  replicas: {{ .Values.backend.replicaCount }}
+  replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
-      app: {{ template "app.name" . }}-backend
+      app: {{ template "app.name" . }}
       release: {{ .Release.Name }}
   template:
     metadata:
       annotations:
         sidecar.istio.io/inject: "true"
       labels:
-        app: {{ template "app.name" . }}-backend
+        app: {{ template "app.name" . }}
         release: {{ .Release.Name }}
     spec:
       containers:
         - name: {{ .Chart.Name }}
-          image: "{{ .Values.backend.image.repository }}:{{ .Values.backend.image.tag }}"
-          imagePullPolicy: {{ .Values.backend.image.pullPolicy }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          env:
+{{ toYaml .Values.env | indent 10 }}
           ports:
-            - containerPort: {{ .Values.backend.appPort }}
+            - containerPort: {{ .Values.appPort }}
               protocol: TCP
           livenessProbe:
             initialDelaySeconds: 30
             periodSeconds: 3
             httpGet:
-              path: {{ .Values.backend.livenessProbePath }}
-              port: {{ .Values.backend.appPort }}
+              path: {{ .Values.livenessProbePath }}
+              port: {{ .Values.appPort }}
           readinessProbe:
             initialDelaySeconds: 20
             periodSeconds: 3
             httpGet:
-              path: {{ .Values.backend.readinessProbePath }}
-              port: {{ .Values.backend.appPort }}
+              path: {{ .Values.readinessProbePath }}
+              port: {{ .Values.appPort }}
           resources:
-{{ toYaml .Values.backend.resources | indent 12 }}
-    {{- with .Values.backend.nodeSelector }}
+{{ toYaml .Values.resources | indent 12 }}
+    {{- with .Values.nodeSelector }}
       nodeSelector:
 {{ toYaml . | indent 8 }}
     {{- end }}
-    {{- with .Values.backend.affinity }}
+    {{- with .Values.affinity }}
       affinity:
 {{ toYaml . | indent 8 }}
     {{- end }}
-    {{- with .Values.backend.tolerations }}
+    {{- with .Values.tolerations }}
       tolerations:
 {{ toYaml . | indent 8 }}
     {{- end }}

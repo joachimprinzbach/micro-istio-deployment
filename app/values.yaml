@@ -1,0 +1,24 @@
+route:
+  enabled: true
+  host: example.tld
+replicaCount: 1
+appPort: 8080
+livenessProbePath: actuator/health
+readinessProbePath: actuator/health
+image:
+  repository: joachimprinzbach/greeting-service
+  tag: latest
+  pullPolicy: Always
+service:
+  type: ClusterIP
+  port: 80
+route:
+  enabled: true
+  path: /
+env:
+  - name: CONCAT_SERVICE_URL
+    value: "test123"
+resources: {}
+nodeSelector: {}
+tolerations: []
+affinity: {}
