@@ -1,18 +1,32 @@
-route:
-  enabled: true
-  host: example.tld
 replicaCount: 1
-appPort: 8080
-livenessProbePath: actuator/health
-readinessProbePath: actuator/health
+
 image:
   repository: joachimprinzbach/greeting-service
   tag: latest
   pullPolicy: Always
+
+nameOverride: ""
+fullnameOverride: ""
+
+appPort: 8080
+
+livenessProbePath: actuator/health
+readinessProbePath: actuator/health
+
 service:
   type: ClusterIP
   port: 80
+
+route:
+  enabled: true
+  host: example.tld
+
+env: {}
+
 resources: {}
+
 nodeSelector: {}
+
 tolerations: []
+
 affinity: {}

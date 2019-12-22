@@ -1,5 +1,4 @@
 dependencies:
-  - name: app
-    repository: file://../app/
-    alias: greeting-service
+  - name: common
+    repository: file://../common/
     version: 0.1.0

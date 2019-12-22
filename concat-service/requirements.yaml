@@ -1,9 +1,4 @@
 dependencies:
-  - name: app
-    repository: file://../app/
-    alias: concat-service-v1
-    version: 0.1.0
-  - name: app
-    repository: file://../app/
-    alias: concat-service-v2
+  - name: common
+    repository: file://../common/
     version: 0.1.0

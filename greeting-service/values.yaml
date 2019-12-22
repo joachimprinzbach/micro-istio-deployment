@@ -1,9 +1,8 @@
-greeting-servivce:
+common:
   route:
     enabled: true
     host: greeting-service.apps.baloise.dev
     path: /
-  concatUrl:
   replicaCount: 1
   appPort: 8080
   image:
