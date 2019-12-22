@@ -5,19 +5,10 @@ concat-service-v1:
     path: /
   replicaCount: 1
   appPort: 8080
-  livenessProbePath: actuator/health
-  readinessProbePath: actuator/health
   image:
     repository: joachimprinzbach/concat-service
     tag: v1
-    pullPolicy: Always
-  service:
-    type: ClusterIP
-    port: 80
   resources: {}
-  env:
-    - name: CONCAT_SERVICE_URL
-      value: "test123"
   nodeSelector: {}
   tolerations: []
   affinity: {}
@@ -29,15 +20,9 @@ concat-service-v2:
     path: /
   replicaCount: 1
   appPort: 8080
-  livenessProbePath: actuator/health
-  readinessProbePath: actuator/health
   image:
     repository: joachimprinzbach/concat-service
     tag: v2
-    pullPolicy: Always
-  service:
-    type: ClusterIP
-    port: 80
   resources: {}
   nodeSelector: {}
   tolerations: []
