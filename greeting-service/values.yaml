@@ -1,22 +1,16 @@
-route:
-  enabled: true
-  host: greeting-service.apps.baloise.dev
-backend:
-  concatUrl: http://concat-service-backend.concat-service.svc/concat
+common:
+  route:
+    enabled: true
+    host: greeting-service.apps.baloise.dev
+    path: /
   replicaCount: 1
   appPort: 8080
-  livenessProbePath: actuator/health
-  readinessProbePath: actuator/health
   image:
     repository: joachimprinzbach/greeting-service
     tag: latest
-    pullPolicy: Always
-  service:
-    type: ClusterIP
-    port: 80
-  route:
-    enabled: true
-    path: /
+  env:
+    - name: CONCAT_SERVICE_URL
+      value: http://concat-service-backend.concat-service.svc/concat
   resources: {}
   nodeSelector: {}
   tolerations: []

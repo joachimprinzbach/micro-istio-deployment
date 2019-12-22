@@ -1,7 +1,7 @@
 {{- if .Values.route.enabled -}}
-{{- $fullName := include "app.fullname" . -}}
+{{- $fullName := include "common.fullname" . -}}
 {{- $defaultUrl := printf "%s.%s" .Release.Name $.Values.route.defaultDomain -}}
-{{- $routePath := .Values.backend.route.path -}}
+{{- $routePath := .Values.route.path -}}
 {{- $host := .Values.route.host -}}
 apiVersion: route.openshift.io/v1
 kind: Route
@@ -11,11 +11,8 @@ metadata:
     kubernetes.io/tls-acme: "true"
 {{- end }}
   labels:
-    app: {{ template "app.name" . }}-backend
-    chart: {{ template "app.chart" . }}
-    release: {{ .Release.Name }}
-    heritage: {{ .Release.Service }}
-  name: {{ $fullName }}-backend
+{{ include "common.labels" . | indent 4 }}
+  name: {{ $fullName }}
 spec:
   host: {{ default $defaultUrl $host }}
   path: {{ $routePath }}
@@ -24,7 +21,7 @@ spec:
     termination: edge
   to:
     kind: Service
-    name: {{ template "app.fullname" . }}-backend
+    name: {{ template "common.fullname" . }}
     weight: 100
   wildcardPolicy: None
 status:
