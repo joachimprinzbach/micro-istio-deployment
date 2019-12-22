@@ -12,12 +12,6 @@ image:
 service:
   type: ClusterIP
   port: 80
-route:
-  enabled: true
-  path: /
-env:
-  - name: CONCAT_SERVICE_URL
-    value: "test123"
 resources: {}
 nodeSelector: {}
 tolerations: []

@@ -1,0 +1,33 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: Gateway
+metadata:
+  name: {{ template "app.fullname" . }}-gateway
+spec:
+  selector:
+    istio: ingressgateway
+  servers:
+  - port:
+      number: 80
+      name: http
+      protocol: HTTP
+    hosts:
+    - "*"
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: {{ template "app.fullname" . }}
+spec:
+  hosts:
+  - "*"
+  gateways:
+  - {{ template "app.fullname" . }}-gateway
+  http:
+  - match:
+    - uri:
+        exact: /greeting
+    route:
+    - destination:
+        host: greeting-service-backend
+        port:
+          number: 80

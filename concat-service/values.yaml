@@ -2,6 +2,7 @@ concat-service-v1:
   route:
     enabled: true
     host: concat-service.apps.baloise.dev
+    path: /
   replicaCount: 1
   appPort: 8080
   livenessProbePath: actuator/health
@@ -13,10 +14,10 @@ concat-service-v1:
   service:
     type: ClusterIP
     port: 80
-  route:
-    enabled: true
-    path: /
   resources: {}
+  env:
+    - name: CONCAT_SERVICE_URL
+      value: "test123"
   nodeSelector: {}
   tolerations: []
   affinity: {}
@@ -25,6 +26,7 @@ concat-service-v2:
   route:
     enabled: true
     host: concat-service.apps.baloise.dev
+    path: /
   replicaCount: 1
   appPort: 8080
   livenessProbePath: actuator/health
@@ -36,9 +38,6 @@ concat-service-v2:
   service:
     type: ClusterIP
     port: 80
-  route:
-    enabled: true
-    path: /
   resources: {}
   nodeSelector: {}
   tolerations: []
