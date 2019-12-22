@@ -1,0 +1,5 @@
+dependencies:
+  - name: app
+    repository: file://../app/
+    alias: greeting-service
+    version: 0.1.0
