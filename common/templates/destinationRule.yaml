@@ -6,7 +6,7 @@ metadata:
     chart: {{ template "common.chart" . }}
     release: {{ .Release.Name }}
 spec:
-  host: {{ .Values.service.name }}.{{.Release.Namespace}}.svc.cluster.local
+  host: {{ template "common.fullname" . }}
   trafficPolicy:
     tls:
       mode: ISTIO_MUTUAL
