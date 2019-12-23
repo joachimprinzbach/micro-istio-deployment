@@ -1,0 +1,58 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: concat-service
+  labels:
+    canary: "false"
+{{ include "concat-service.labels" . | indent 4 }}
+spec:
+  replicas: {{ .Values.productionDeployment.replicaCount }}
+  selector:
+    matchLabels:
+      app: concat-service
+      canary: "false"
+      release: {{ .Release.Name }}
+  template:
+    metadata:
+      annotations:
+        sidecar.istio.io/inject: "true"
+      labels:
+        app: concat-service
+        canary: "false"
+        release: {{ .Release.Name }}
+    spec:
+      containers:
+        - name: {{ .Chart.Name }}
+          image: "{{ .Values.productionDeployment.image.repository }}:{{ .Values.productionDeployment.image.tag }}"
+          imagePullPolicy: {{ .Values.productionDeployment.image.pullPolicy }}
+          ports:
+            - containerPort: {{ .Values.appPort }}
+              protocol: TCP
+          livenessProbe:
+            initialDelaySeconds: 30
+            periodSeconds: 3
+            httpGet:
+              path: {{ .Values.livenessProbePath }}
+              port: {{ .Values.appPort }}
+          readinessProbe:
+            initialDelaySeconds: 20
+            periodSeconds: 3
+            httpGet:
+              path: {{ .Values.readinessProbePath }}
+              port: {{ .Values.appPort }}
+          env:
+{{ toYaml .Values.productionDeployment.env | indent 12 }}
+          resources:
+{{ toYaml .Values.resources | indent 12 }}
+    {{- with .Values.nodeSelector }}
+      nodeSelector:
+{{ toYaml . | indent 8 }}
+    {{- end }}
+    {{- with .Values.affinity }}
+      affinity:
+{{ toYaml . | indent 8 }}
+    {{- end }}
+    {{- with .Values.tolerations }}
+      tolerations:
+{{ toYaml . | indent 8 }}
+    {{- end }}

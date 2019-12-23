@@ -1,0 +1,18 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  name: concat-service
+  labels:
+    release: {{ .Release.Name }}
+spec:
+  host: concat-service
+  trafficPolicy:
+    tls:
+      mode: ISTIO_MUTUAL
+  subsets:
+  - name: production
+    labels:
+      canary: "false"
+  - name: canary
+    labels:
+      canary: "true"

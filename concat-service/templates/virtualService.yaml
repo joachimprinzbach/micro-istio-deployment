@@ -1,0 +1,23 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: concat-service
+  labels:
+    release: {{ .Release.Name }}
+spec:
+  hosts:
+  - concat-service
+  http:
+  - route:
+    - destination:
+        host: concat-service
+        subset: production
+        port:
+          number: {{ .Values.service.port }}
+      weight: {{ .Values.productionDeployment.weight }}
+    - destination:
+        host: concat-service
+        subset: canary
+        port:
+          number: {{ .Values.service.port }}
+      weight: {{ .Values.canaryDeployment.weight }}
