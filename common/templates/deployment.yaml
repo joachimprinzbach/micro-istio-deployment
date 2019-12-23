@@ -37,6 +37,8 @@ spec:
             httpGet:
               path: {{ .Values.readinessProbePath }}
               port: {{ .Values.appPort }}
+          env:
+{{ toYaml .Values.env | indent 12 }}
           resources:
 {{ toYaml .Values.resources | indent 12 }}
     {{- with .Values.nodeSelector }}
