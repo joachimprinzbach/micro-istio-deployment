@@ -6,10 +6,6 @@ productionDeployment:
     tag: latest
     pullPolicy: Always
   env: []
-  resources: {}
-  nodeSelector: {}
-  tolerations: []
-  affinity: {}
 
 canaryDeployment:
   replicaCount: 0
@@ -19,11 +15,11 @@ canaryDeployment:
     tag: latest
     pullPolicy: Always
   env: []
-  resources: {}
-  nodeSelector: {}
-  tolerations: []
-  affinity: {}
 
+resources: {}
+nodeSelector: {}
+tolerations: []
+affinity: {}
 appPort: 8080
 livenessProbePath: actuator/health
 readinessProbePath: actuator/health
