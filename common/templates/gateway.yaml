@@ -1,7 +1,7 @@
 apiVersion: networking.istio.io/v1alpha3
 kind: Gateway
 metadata:
-  name: {{ template "app.fullname" . }}-gateway
+  name: {{ template "common.fullname" . }}-gateway
   labels:
     chart: {{ template "common.chart" . }}
     release: {{ .Release.Name }}

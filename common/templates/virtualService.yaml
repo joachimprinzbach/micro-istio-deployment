@@ -2,7 +2,7 @@
 apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
 metadata:
-  name: {{ template "app.fullname" . }}-virtual-service
+  name: {{ template "common.fullname" . }}-virtual-service
   labels:
     chart: {{ template "common.chart" . }}
     release: {{ .Release.Name }}
@@ -10,7 +10,7 @@ spec:
   hosts:
   - {{ .Values.service.name }}.{{ .Release.Namespace }}.svc.cluster.local
   gateways:
-  - {{ template "app.fullname" . }}-gateway
+  - {{ template "common.fullname" . }}-gateway
   http:
   - route:
     - destination:
