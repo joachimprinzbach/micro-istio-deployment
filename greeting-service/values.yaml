@@ -5,7 +5,7 @@ greeting-service:
     path: /
   productionDeployment:
     replicaCount: 1
-    weight: 100
+    weight: 50
     image:
       repository: joachimprinzbach/greeting-service
       tag: latest
@@ -14,7 +14,7 @@ greeting-service:
         value: http://concat-service-backend.concat-service.svc/concat
   canaryDeployment:
     replicaCount: 1
-    weight: 0
+    weight: 50
     image:
       repository: joachimprinzbach/greeting-service
       tag: latest

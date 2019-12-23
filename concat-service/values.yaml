@@ -5,13 +5,13 @@ concat-service:
     path: /
   productionDeployment:
     replicaCount: 1
-    weight: 100
+    weight: 80
     image:
       repository: joachimprinzbach/concat-service
       tag: latest
   canaryDeployment:
     replicaCount: 1
-    weight: 0
+    weight: 20
     image:
       repository: joachimprinzbach/concat-service
       tag: latest
