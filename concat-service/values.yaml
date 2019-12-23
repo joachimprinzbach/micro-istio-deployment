@@ -10,7 +10,7 @@ concat-service:
       repository: joachimprinzbach/concat-service
       tag: latest
   canaryDeployment:
-    replicaCount: 1
+    replicaCount: 0
     weight: 0
     image:
       repository: joachimprinzbach/concat-service
