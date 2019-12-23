@@ -5,17 +5,10 @@ productionDeployment:
     repository: joachimprinzbach/greeting-service
     tag: latest
     pullPolicy: Always
-
-  livenessProbePath: actuator/health
-  readinessProbePath: actuator/health
   env: []
-
   resources: {}
-
   nodeSelector: {}
-
   tolerations: []
-
   affinity: {}
 
 canaryDeployment:
@@ -25,20 +18,15 @@ canaryDeployment:
     repository: joachimprinzbach/greeting-service
     tag: latest
     pullPolicy: Always
-
-  livenessProbePath: actuator/health
-  readinessProbePath: actuator/health
   env: []
-
   resources: {}
-
   nodeSelector: {}
-
   tolerations: []
-
   affinity: {}
 
 appPort: 8080
+livenessProbePath: actuator/health
+readinessProbePath: actuator/health
 
 service:
   type: ClusterIP
