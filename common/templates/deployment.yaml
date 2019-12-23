@@ -26,32 +26,32 @@ spec:
           env:
 {{ toYaml .Values.env | indent 12 }}
 {{- end }}
-      ports:
-        - containerPort: {{ .Values.appPort }}
-          protocol: TCP
-      livenessProbe:
-        initialDelaySeconds: 30
-        periodSeconds: 3
-        httpGet:
-          path: {{ .Values.livenessProbePath }}
-          port: {{ .Values.appPort }}
-      readinessProbe:
-        initialDelaySeconds: 20
-        periodSeconds: 3
-        httpGet:
-          path: {{ .Values.readinessProbePath }}
-          port: {{ .Values.appPort }}
-resources:
-  {{ toYaml .Values.resources | indent 12 }}
-  {{- with .Values.nodeSelector }}
-nodeSelector:
-  {{ toYaml . | indent 8 }}
-  {{- end }}
-  {{- with .Values.affinity }}
-affinity:
-  {{ toYaml . | indent 8 }}
-  {{- end }}
-  {{- with .Values.tolerations }}
-tolerations:
-  {{ toYaml . | indent 8 }}
-  {{- end }}
+          ports:
+            - containerPort: {{ .Values.appPort }}
+              protocol: TCP
+          livenessProbe:
+            initialDelaySeconds: 30
+            periodSeconds: 3
+            httpGet:
+              path: {{ .Values.livenessProbePath }}
+              port: {{ .Values.appPort }}
+          readinessProbe:
+            initialDelaySeconds: 20
+            periodSeconds: 3
+            httpGet:
+              path: {{ .Values.readinessProbePath }}
+              port: {{ .Values.appPort }}
+          resources:
+{{ toYaml .Values.resources | indent 12 }}
+    {{- with .Values.nodeSelector }}
+      nodeSelector:
+{{ toYaml . | indent 8 }}
+    {{- end }}
+    {{- with .Values.affinity }}
+      affinity:
+{{ toYaml . | indent 8 }}
+    {{- end }}
+    {{- with .Values.tolerations }}
+      tolerations:
+{{ toYaml . | indent 8 }}
+    {{- end }}
