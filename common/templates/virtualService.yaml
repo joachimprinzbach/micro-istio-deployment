@@ -1,25 +1,23 @@
 apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
 metadata:
-  name: {{ template "common.fullname" . }}-virtual-service
+  name: {{ template "common.name" . }}
   labels:
     chart: {{ template "common.chart" . }}
     release: {{ .Release.Name }}
 spec:
   hosts:
-  - "*"
-  gateways:
-  - {{ template "common.fullname" . }}-gateway
+  - {{ template "common.name" . }}
   http:
   - route:
     - destination:
-        host: {{ template "common.fullname" . }}
+        host: {{ template "common.name" . }}
         subset: production
         port:
           number: {{ .Values.service.port }}
       weight: {{ .Values.productionDeployment.weight }}
     - destination:
-        host: {{ template "common.fullname" . }}
+        host: {{ template "common.name" . }}
         subset: canary
         port:
           number: {{ .Values.service.port }}

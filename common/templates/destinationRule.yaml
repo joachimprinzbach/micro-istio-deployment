@@ -1,12 +1,12 @@
 apiVersion: networking.istio.io/v1alpha3
 kind: DestinationRule
 metadata:
-  name: {{ template "common.fullname" . }}-destination-rule
+  name: {{ template "common.name" . }}
   labels:
     chart: {{ template "common.chart" . }}
     release: {{ .Release.Name }}
 spec:
-  host: "*"
+  host: {{ template "common.name" . }}
   trafficPolicy:
     tls:
       mode: ISTIO_MUTUAL

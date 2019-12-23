@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ template "common.fullname" . }}
+  name: {{ template "common.name" . }}
   labels:
     canary: "false"
 {{ include "common.labels" . | indent 4 }}

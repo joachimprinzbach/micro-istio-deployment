@@ -21,7 +21,7 @@ spec:
     termination: edge
   to:
     kind: Service
-    name: {{ template "common.fullname" . }}
+    name: {{ template "common.name" . }}
     weight: 100
   wildcardPolicy: None
 status:
