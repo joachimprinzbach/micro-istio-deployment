@@ -1,17 +1,45 @@
-replicaCount: 1
+productionDeployment:
+  replicaCount: 1
+  weight: 100
+  image:
+    repository: joachimprinzbach/greeting-service
+    tag: latest
+    pullPolicy: Always
 
-image:
-  repository: joachimprinzbach/greeting-service
-  tag: latest
-  pullPolicy: Always
+  appPort: 8080
+  livenessProbePath: actuator/health
+  readinessProbePath: actuator/health
+  env: []
 
-nameOverride: ""
-fullnameOverride: ""
+  resources: {}
 
-appPort: 8080
+  nodeSelector: {}
 
-livenessProbePath: actuator/health
-readinessProbePath: actuator/health
+  tolerations: []
+
+  affinity: {}
+
+canaryDeployment:
+  replicaCount: 0
+  weight: 0
+  image:
+    repository: joachimprinzbach/greeting-service
+    tag: latest
+    pullPolicy: Always
+
+  appPort: 8080
+  livenessProbePath: actuator/health
+  readinessProbePath: actuator/health
+  env: []
+
+  resources: {}
+
+  nodeSelector: {}
+
+  tolerations: []
+
+  affinity: {}
+
 
 service:
   type: ClusterIP
@@ -21,12 +49,3 @@ route:
   enabled: true
   host: example.tld
 
-env: []
-
-resources: {}
-
-nodeSelector: {}
-
-tolerations: []
-
-affinity: {}

@@ -3,14 +3,14 @@ kind: Deployment
 metadata:
   name: {{ template "common.fullname" . }}
   labels:
-    canary: "false"
-  {{ include "common.labels" . | indent 4 }}
+    canary: "true"
+{{ include "common.labels" . | indent 4 }}
 spec:
-  replicas: {{ .Values.productionDeployment.replicaCount }}
+  replicas: {{ .Values.canaryDeployment.replicaCount }}
   selector:
     matchLabels:
       app: {{ template "common.name" . }}
-      canary: "false"
+      canary: "true"
       release: {{ .Release.Name }}
   template:
     metadata:
@@ -18,13 +18,13 @@ spec:
         sidecar.istio.io/inject: "true"
       labels:
         app: {{ template "common.name" . }}
-        canary: "false"
+        canary: "true"
         release: {{ .Release.Name }}
     spec:
       containers:
         - name: {{ .Chart.Name }}
-          image: "{{ .Values.productionDeployment.image.repository }}:{{ .Values.productionDeployment.image.tag }}"
-          imagePullPolicy: {{ .Values.productionDeployment.image.pullPolicy }}
+          image: "{{ .Values.canaryDeployment.image.repository }}:{{ .Values.canaryDeployment.image.tag }}"
+          imagePullPolicy: {{ .Values.canaryDeployment.image.pullPolicy }}
           ports:
             - containerPort: {{ .Values.appPort }}
               protocol: TCP
@@ -41,18 +41,18 @@ spec:
               path: {{ .Values.readinessProbePath }}
               port: {{ .Values.appPort }}
           env:
-  {{ toYaml .Values.env | indent 12 }}
-resources:
-  {{ toYaml .Values.resources | indent 12 }}
-  {{- with .Values.nodeSelector }}
-nodeSelector:
-  {{ toYaml . | indent 8 }}
-  {{- end }}
-  {{- with .Values.affinity }}
-affinity:
-  {{ toYaml . | indent 8 }}
-  {{- end }}
-  {{- with .Values.tolerations }}
-tolerations:
-  {{ toYaml . | indent 8 }}
-  {{- end }}
+{{ toYaml .Values.env | indent 12 }}
+          resources:
+{{ toYaml .Values.resources | indent 12 }}
+    {{- with .Values.nodeSelector }}
+      nodeSelector:
+{{ toYaml . | indent 8 }}
+    {{- end }}
+    {{- with .Values.affinity }}
+      affinity:
+{{ toYaml . | indent 8 }}
+    {{- end }}
+    {{- with .Values.tolerations }}
+      tolerations:
+{{ toYaml . | indent 8 }}
+    {{- end }}
