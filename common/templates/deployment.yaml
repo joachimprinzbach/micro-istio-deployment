@@ -3,10 +3,7 @@ kind: Deployment
 metadata:
   name: {{ template "common.fullname" . }}
   labels:
-    app: {{ template "common.name" . }}
-    chart: {{ template "common.chart" . }}
-    release: {{ .Release.Name }}
-    heritage: {{ .Release.Service }}
+{{ include "common.labels" . | indent 4 }}
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:

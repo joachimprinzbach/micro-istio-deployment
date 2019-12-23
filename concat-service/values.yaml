@@ -7,7 +7,7 @@ concat-service:
   appPort: 8080
   image:
     repository: joachimprinzbach/concat-service
-    tag: v1
+    tag: latest
   resources: {}
   nodeSelector: {}
   tolerations: []
