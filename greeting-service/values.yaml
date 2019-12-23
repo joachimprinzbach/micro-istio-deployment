@@ -13,7 +13,7 @@ greeting-service:
       - name: CONCAT_SERVICE_URL
         value: http://concat-service-backend.concat-service.svc/concat
   canaryDeployment:
-    replicaCount: 0
+    replicaCount: 1
     weight: 0
     image:
       repository: joachimprinzbach/greeting-service
