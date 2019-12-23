@@ -1,13 +1,14 @@
-route:
-  enabled: true
-  host: concat-service.apps.baloise.dev
-  path: /
-replicaCount: 1
-appPort: 8080
-image:
-  repository: joachimprinzbach/concat-service
-  tag: v1
-resources: {}
-nodeSelector: {}
-tolerations: []
-affinity: {}
+concat-service:
+  route:
+    enabled: true
+    host: concat-service.apps.baloise.dev
+    path: /
+  replicaCount: 1
+  appPort: 8080
+  image:
+    repository: joachimprinzbach/concat-service
+    tag: v1
+  resources: {}
+  nodeSelector: {}
+  tolerations: []
+  affinity: {}

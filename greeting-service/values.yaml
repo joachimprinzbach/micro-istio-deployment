@@ -1,16 +1,17 @@
-route:
-  enabled: true
-  host: greeting-service.apps.baloise.dev
-  path: /
-replicaCount: 1
-appPort: 8080
-image:
-  repository: joachimprinzbach/greeting-service
-  tag: latest
-env:
-  - name: CONCAT_SERVICE_URL
-    value: http://concat-service-backend.concat-service.svc/concat
-resources: {}
-nodeSelector: {}
-tolerations: []
-affinity: {}
+greeting-service:
+  route:
+    enabled: true
+    host: greeting-service.apps.baloise.dev
+    path: /
+  replicaCount: 1
+  appPort: 8080
+  image:
+    repository: joachimprinzbach/greeting-service
+    tag: latest
+  env:
+    - name: CONCAT_SERVICE_URL
+      value: http://concat-service-backend.concat-service.svc/concat
+  resources: {}
+  nodeSelector: {}
+  tolerations: []
+  affinity: {}
