@@ -6,7 +6,6 @@ productionDeployment:
     tag: latest
     pullPolicy: Always
 
-  appPort: 8080
   livenessProbePath: actuator/health
   readinessProbePath: actuator/health
   env: []
@@ -27,7 +26,6 @@ canaryDeployment:
     tag: latest
     pullPolicy: Always
 
-  appPort: 8080
   livenessProbePath: actuator/health
   readinessProbePath: actuator/health
   env: []
@@ -40,6 +38,7 @@ canaryDeployment:
 
   affinity: {}
 
+appPort: 8080
 
 service:
   type: ClusterIP
