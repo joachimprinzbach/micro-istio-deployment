@@ -21,7 +21,7 @@ route:
   enabled: true
   host: example.tld
 
-env: {}
+env: []
 
 resources: {}
 
