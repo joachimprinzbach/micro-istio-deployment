@@ -7,7 +7,7 @@ spec:
     istio: ingressgateway
   servers:
     - port:
-        number: 80
+        number: {{ .Values.service.port }}
         name: http
         protocol: HTTP
       hosts:
@@ -27,4 +27,4 @@ spec:
       - destination:
           host: {{ template "common.name" . }}
           port:
-            number: 80
+            number: {{ .Values.service.port }}
