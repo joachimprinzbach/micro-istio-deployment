@@ -23,8 +23,11 @@ spec:
   gateways:
     - {{ template "common.name" . }}-gateway
   http:
-  - route:
-      - destination:
-          host: {{ template "common.name" . }}
-          port:
-            number: {{ .Values.service.port }}
+  - match:
+    - uri:
+        prefix: /
+    route:
+    - destination:
+        host: {{ template "common.name" . }}
+        port:
+          number: {{ .Values.service.port }}
