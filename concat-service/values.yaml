@@ -8,10 +8,10 @@ concat-service:
     weight: 80
     image:
       repository: joachimprinzbach/concat-service
-      tag: latest
+      tag: master-298bec90cb7f9eaa15c9a8f30b4f4c1b471cff8c
   canaryDeployment:
     replicaCount: 1
     weight: 20
     image:
       repository: joachimprinzbach/concat-service
-      tag: latest
+      tag: feat-canary-a0534d021cadd3bcd66bc8a49f0fa7d1e22f0e78
