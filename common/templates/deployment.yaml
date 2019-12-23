@@ -4,7 +4,7 @@ metadata:
   name: {{ template "common.fullname" . }}
   labels:
     canary: "false"
-  {{ include "common.labels" . | indent 4 }}
+{{ include "common.labels" . | indent 4 }}
 spec:
   replicas: {{ .Values.productionDeployment.replicaCount }}
   selector:
