@@ -5,13 +5,13 @@ concat-service:
     path: /
   productionDeployment:
     replicaCount: 1
-    weight: 80
+    weight: 100
     image:
       repository: joachimprinzbach/concat-service
       tag: master-298bec90cb7f9eaa15c9a8f30b4f4c1b471cff8c
   canaryDeployment:
     replicaCount: 1
-    weight: 20
+    weight: 0
     image:
       repository: joachimprinzbach/concat-service
       tag: feat-canary-a0534d021cadd3bcd66bc8a49f0fa7d1e22f0e78
