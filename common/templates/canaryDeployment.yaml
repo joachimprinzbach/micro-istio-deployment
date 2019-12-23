@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ template "common.fullname" . }}
+  name: {{ template "common.fullname" . }}-canary
   labels:
     canary: "true"
 {{ include "common.labels" . | indent 4 }}
@@ -22,7 +22,7 @@ spec:
         release: {{ .Release.Name }}
     spec:
       containers:
-        - name: {{ .Chart.Name }}
+        - name: {{ .Chart.Name }}-canary
           image: "{{ .Values.canaryDeployment.image.repository }}:{{ .Values.canaryDeployment.image.tag }}"
           imagePullPolicy: {{ .Values.canaryDeployment.image.pullPolicy }}
           ports:
