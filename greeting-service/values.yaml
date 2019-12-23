@@ -4,7 +4,7 @@ greeting-service:
     host: greeting-service.apps.baloise.dev
     path: /
   productionDeployment:
-    replicaCount: 2
+    replicaCount: 1
     weight: 100
     image:
       repository: joachimprinzbach/greeting-service
