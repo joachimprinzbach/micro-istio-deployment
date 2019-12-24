@@ -1,30 +1,38 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: concat-service
+  name: {{ template "app.fullname" . }}
   labels:
-    canary: "false"
-{{ include "concat-service.labels" . | indent 4 }}
+    app: {{ template "app.name" . }}
+    chart: {{ template "app.chart" . }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
 spec:
-  replicas: {{ .Values.productionDeployment.replicaCount }}
+  replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
-      app: concat-service
-      canary: "false"
+      app: {{ template "app.name" . }}
       release: {{ .Release.Name }}
   template:
     metadata:
       annotations:
+{{- if .Values.istio.enabled }}
         sidecar.istio.io/inject: "true"
+{{- end }}
       labels:
-        app: concat-service
-        canary: "false"
+        app: {{ .Values.appName }}
         release: {{ .Release.Name }}
+        version: {{ .Values.version }}
     spec:
       containers:
         - name: {{ .Chart.Name }}
-          image: "{{ .Values.productionDeployment.image.repository }}:{{ .Values.productionDeployment.image.tag }}"
-          imagePullPolicy: {{ .Values.productionDeployment.image.pullPolicy }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+{{ $length := len .Values.env }}
+        {{- if gt $length 0 }}
+          env:
+{{ toYaml .Values.env | indent 10 }}
+{{- end }}
           ports:
             - containerPort: {{ .Values.appPort }}
               protocol: TCP
@@ -40,8 +48,6 @@ spec:
             httpGet:
               path: {{ .Values.readinessProbePath }}
               port: {{ .Values.appPort }}
-          env:
-{{ toYaml .Values.productionDeployment.env | indent 12 }}
           resources:
 {{ toYaml .Values.resources | indent 12 }}
     {{- with .Values.nodeSelector }}

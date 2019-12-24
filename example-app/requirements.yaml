@@ -1,0 +1,13 @@
+dependencies:
+  - name: app
+    repository: file://../app/
+    alias: concat-service-v1
+    version: 0.1.0
+  - name: app
+    repository: file://../app/
+    alias: concat-service-v2
+    version: 0.1.0
+  - name: app
+    repository: file://../app/
+    alias: greeting-service-v1
+    version: 0.1.0

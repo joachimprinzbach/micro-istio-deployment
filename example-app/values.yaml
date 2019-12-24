@@ -1,0 +1,53 @@
+concat-service-v1:
+  appName: concat-service
+  version: v1
+  route:
+    enabled: true
+    host: concat-service.apps.baloise.dev
+  replicaCount: 1
+  appPort: 8080
+  livenessProbePath: actuator/health
+  readinessProbePath: actuator/health
+  image:
+    repository: joachimprinzbach/concat-service
+    tag: v1
+  service:
+    type: ClusterIP
+    port: 80
+
+concat-service-v2:
+  appName: concat-service
+  version: v2
+  route:
+    enabled: true
+    host: concat-service.apps.baloise.dev
+  replicaCount: 1
+  appPort: 8080
+  livenessProbePath: actuator/health
+  readinessProbePath: actuator/health
+  image:
+    repository: joachimprinzbach/concat-service
+    tag: v2
+  service:
+    type: ClusterIP
+    port: 80
+
+greeting-service-v1:
+  appName: greeting-service
+  version: v1
+  route:
+    enabled: true
+    host: greeting-service-v1.apps.baloise.dev
+  env:
+    - name: CONCAT_SERVICE_URL
+      value: http://concat-service/concat
+  replicaCount: 1
+  appPort: 8080
+  livenessProbePath: actuator/health
+  readinessProbePath: actuator/health
+  image:
+    repository: joachimprinzbach/greeting-service
+    tag: latest
+  service:
+    type: ClusterIP
+    port: 80

@@ -1,0 +1,27 @@
+# appName: app-1
+version: v1
+route:
+  enabled: false
+  #host: example.tld
+  path: /
+# version: v1
+replicaCount: 1
+appPort: 8080
+#livenessProbePath: actuator/health
+#readinessProbePath: actuator/health
+image:
+  repository:
+  tag:
+  pullPolicy: Always
+service:
+  type: ClusterIP
+  port: 80
+env: []
+#  - name: CONCAT_SERVICE_URL
+#    value: "test123"
+istio:
+  enabled: true
+resources: {}
+nodeSelector: {}
+tolerations: []
+affinity: {}
