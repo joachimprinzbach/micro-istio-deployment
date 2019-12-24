@@ -12,7 +12,7 @@ metadata:
 spec:
     type: {{ default "ClusterIP" .type }}
     ports:
-        - port: {{ .port }}
+        - port: {{ .appPort }}
           targetPort: {{ .appPort }}
           protocol: TCP
     selector:

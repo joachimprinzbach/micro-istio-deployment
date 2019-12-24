@@ -25,7 +25,7 @@ greeting-service-v1:
   version: v1
   env:
     - name: CONCAT_SERVICE_URL
-      value: http://concat-service/concat
+      value: http://concat-service:8080/concat
   replicaCount: 1
   appPort: 8080
   livenessProbePath: actuator/health
