@@ -56,6 +56,6 @@ istio:
         - /concat
       subsets:
         - name: v1
-          weight: 10
-        - name: v2
           weight: 90
+        - name: v2
+          weight: 10
