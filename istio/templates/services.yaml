@@ -32,7 +32,7 @@ spec:
     - match:
     {{- range .paths }}
       - uri:
-        exact: {{ . }}
+          exact: {{ . }}
     {{- end }}
     {{- end }}
       route:
