@@ -14,6 +14,7 @@ image:
   tag:
   pullPolicy: Always
 service:
+  enabled: false
   type: ClusterIP
   port: 80
 env: []
