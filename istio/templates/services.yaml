@@ -39,5 +39,5 @@ spec:
         - destination:
             host: {{ .host }}
             port:
-              number: {{ .port }}
+              number: {{ .appPort }}
 {{- end }}
