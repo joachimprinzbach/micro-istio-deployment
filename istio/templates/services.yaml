@@ -32,12 +32,12 @@ spec:
     - match:
     {{- range .paths }}
       - uri:
-          exact: {{ . }}
+          prefix: {{ . }}
     {{- end }}
     {{- end }}
       route:
         - destination:
-            host: {{ .name }}
+            host: {{ .host }}
             port:
               number: {{ .port }}
 {{- end }}
