@@ -1,0 +1,43 @@
+{{ range .Values.services }}
+---
+apiVersion: v1
+kind: Service
+metadata:
+    name: {{ .name }}
+    labels:
+        app: {{ .name }}
+        chart: {{ template "istio.chart" $ }}
+        release: {{ $.Release.Name }}
+        heritage: {{ $.Release.Service }}
+spec:
+    type: {{ default "ClusterIP" .type }}
+    ports:
+        - port: {{ .port }}
+          targetPort: {{ .appPort }}
+          protocol: TCP
+    selector:
+        app: {{ default .name .appName }}
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: {{ .name }}
+spec:
+  hosts:
+    - "*"
+  gateways:
+  - {{ $.Values.gatewayName }}
+{{- if .paths }}
+  http:
+    - match:
+    {{- range .paths }}
+      - uri:
+        exact: {{ . }}
+    {{- end }}
+    {{- end }}
+      route:
+        - destination:
+            host: {{ .name }}
+            port:
+              number: {{ .port }}
+{{- end }}

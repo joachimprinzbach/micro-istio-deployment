@@ -51,3 +51,18 @@ greeting-service-v1:
   service:
     type: ClusterIP
     port: 80
+
+
+istio:
+  gatewayName: example-app
+  services:
+    - name: greeting-service
+      appPort: 8080
+      port: 80
+      paths:
+        - /greeting
+    - name: concat-service
+      appPort: 8080
+      port: 80
+      paths:
+        - /concat

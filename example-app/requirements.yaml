@@ -11,3 +11,6 @@ dependencies:
     repository: file://../app/
     alias: greeting-service-v1
     version: 0.1.0
+  - name: istio
+    repository: file://../istio/
+    version: 0.1.0
