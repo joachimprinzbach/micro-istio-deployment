@@ -23,11 +23,14 @@ kind: VirtualService
 metadata:
   name: {{ .name }}
 spec:
+{{- if .gateway}}
   hosts:
     - "*"
-{{- if .gateway}}
   gateways:
   - {{ template "istio.name" $ }}
+{{- else }}
+  hosts:
+    - "{{ .host }}"
 {{- end }}
 {{- if .paths }}
   http:
