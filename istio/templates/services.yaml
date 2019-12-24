@@ -45,4 +45,17 @@ spec:
               number: {{ $service.appPort }}
           weight: {{ .weight }}
 {{- end }}
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  name: {{ .name }}
+spec:
+  host: {{ .host }}
+  subsets:
+{{- range .subsets }}
+    - name: {{ .name }}
+      labels:
+        version: {{ .name }}
+{{- end }}
 {{- end }}
