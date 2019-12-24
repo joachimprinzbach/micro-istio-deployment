@@ -43,9 +43,17 @@ istio:
       port: 80
       paths:
         - /greeting
+      subsets:
+        - name: v1
+          weight: 100
     - name: concat-service
       host: concat-service
       appPort: 8080
       port: 80
       paths:
         - /concat
+      subsets:
+        - name: v1
+          weight: 10
+        - name: v2
+          weight: 90

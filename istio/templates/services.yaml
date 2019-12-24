@@ -36,8 +36,13 @@ spec:
     {{- end }}
     {{- end }}
       route:
+{{- $service := .}}
+{{- range .subsets }}
         - destination:
-            host: {{ .host }}
+            host: {{ $service.host }}
+            subset: {{ .name }}
             port:
-              number: {{ .appPort }}
+              number: {{ $service.appPort }}
+          weight: {{ .weight }}
+{{- end }}
 {{- end }}
