@@ -14,7 +14,7 @@ spec:
     ports:
         - port: {{ .appPort }}
           targetPort: {{ .appPort }}
-          protocol: TCP
+          name: http
     selector:
         app: {{ default .name .appName }}
 ---
