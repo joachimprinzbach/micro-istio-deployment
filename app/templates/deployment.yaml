@@ -11,8 +11,9 @@ spec:
   replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
-      app: {{ template "app.name" . }}
+      app: {{ .Values.appName }}
       release: {{ .Release.Name }}
+      version: {{ .Values.version }}
   template:
     metadata:
       annotations:
