@@ -38,13 +38,13 @@ istio:
   gatewayName: example-app
   services:
     - name: greeting-service
-      host: greeting-service.example-app.svc
+      host: greeting-service
       appPort: 8080
       port: 80
       paths:
         - /greeting
     - name: concat-service
-      host: concat-service.example-app.svc
+      host: concat-service
       appPort: 8080
       port: 80
       paths:
