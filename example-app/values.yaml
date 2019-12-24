@@ -3,14 +3,14 @@ concat-service-v1:
   version: v1
   route:
     enabled: true
-    host: concat-service.apps.baloise.dev
+    host: concat-service-v1.apps.baloise.dev
   replicaCount: 1
   appPort: 8080
   livenessProbePath: actuator/health
   readinessProbePath: actuator/health
   image:
     repository: joachimprinzbach/concat-service
-    tag: v1
+    tag: master
   service:
     type: ClusterIP
     port: 80
@@ -20,14 +20,14 @@ concat-service-v2:
   version: v2
   route:
     enabled: true
-    host: concat-service.apps.baloise.dev
+    host: concat-service-v2.apps.baloise.dev
   replicaCount: 1
   appPort: 8080
   livenessProbePath: actuator/health
   readinessProbePath: actuator/health
   image:
     repository: joachimprinzbach/concat-service
-    tag: v2
+    tag: feat-canary-a0534d021cadd3bcd66bc8a49f0fa7d1e22f0e78
   service:
     type: ClusterIP
     port: 80
@@ -47,7 +47,7 @@ greeting-service-v1:
   readinessProbePath: actuator/health
   image:
     repository: joachimprinzbach/greeting-service
-    tag: latest
+    tag: master
   service:
     type: ClusterIP
     port: 80
