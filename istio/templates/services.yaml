@@ -65,7 +65,7 @@ metadata:
 spec:
   host: {{ .name }}
   subsets:
-{{- range .subsets }}
+{{- range .versions }}
     - name: {{ .name }}
       labels:
         version: {{ .name }}
