@@ -50,8 +50,8 @@ istio:
       gateway: false
       appPort: 8080
       port: 80
-      paths:
-        - /concat
+ #     paths:
+#        - /concat
       versions:
         - name: v2
           cookieRegex: "^(.*?;)?(email=[^;]*@gmail.com)(;.*)?$"
