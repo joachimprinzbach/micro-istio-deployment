@@ -18,7 +18,7 @@ concat-service-v2:
   readinessProbePath: actuator/health
   image:
     repository: joachimprinzbach/concat-service
-    tag: feat-canary-a0534d021cadd3bcd66bc8a49f0fa7d1e22f0e78
+    tag: feat-canary-2-22ebc6dc9a2b1c3225233cfe29fc2020deb01db5
 
 greeting-service-v1:
   appName: greeting-service
