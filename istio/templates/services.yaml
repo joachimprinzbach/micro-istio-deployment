@@ -45,7 +45,7 @@ spec:
 {{- if .cookieRegex }}
         - headers:
             cookie:
-              regex: "{{ .cookieRegex }}"
+              regex: {{ .cookieRegex | quote }}
 {{- end }}
       route:
           - destination:
