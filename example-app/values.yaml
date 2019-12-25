@@ -53,6 +53,6 @@ istio:
       paths:
         - /concat
       versions:
-        - name: v1
         - name: v2
           cookieRegex: "^(.*?;)?(email=[^;]*@gmail.com)(;.*)?$"
+        - name: v1
