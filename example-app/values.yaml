@@ -38,24 +38,21 @@ istio:
   gatewayName: example-app
   services:
     - name: greeting-service
-      host: greeting-service
       gateway: true
       appPort: 8080
       port: 80
       paths:
         - /greeting
-      subsets:
+        - /login
+      versions:
         - name: v1
-          weight: 100
     - name: concat-service
-      host: concat-service
       gateway: false
       appPort: 8080
       port: 80
       paths:
         - /concat
-      subsets:
+      versions:
         - name: v1
-          weight: 90
         - name: v2
-          weight: 10
+          cookieRegex: "^(.*?;)?(email=[^;]*@gmail.com)(;.*)?$"
