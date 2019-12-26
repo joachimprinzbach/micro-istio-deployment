@@ -52,12 +52,14 @@ istio:
         - name: v2
           match:
             - uri:
-                regeix: "^\/(concat|login).*$"
+                regeix: |
+                  ^\/(concat|login).*$
               headers:
                 cookie:
-                  regex: "^(.*?;)?(email=[^;]*@gmail.com)(;.*)?$"
+                  regex: |
+                    ^(.*?;)?(email=[^;]*@gmail.com)(;.*)?$
         - name: v1
           match:
             - uri:
-                regeix: "^\/(concat|login).*$"
-
+                regeix: |
+                  ^\/(concat|login).*$
