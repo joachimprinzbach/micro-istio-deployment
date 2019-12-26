@@ -52,7 +52,7 @@ istio:
         - name: v2
           match:
             - uri:
-                regeix: |
+                regex: |
                   ^\/(concat|login).*$
               headers:
                 cookie:
@@ -61,5 +61,5 @@ istio:
         - name: v1
           match:
             - uri:
-                regeix: |
+                regex: |
                   ^\/(concat|login).*$
