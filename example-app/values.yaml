@@ -45,6 +45,8 @@ istio:
           match:
             - uri:
                 prefix: /greeting
+            - uri:
+                prefix: /login
     - name: concat-service
       gateway: false
       port: 8080
@@ -52,8 +54,7 @@ istio:
         - name: v2
           match:
             - uri:
-                regex: |
-                  ^\/(concat|login).*$
+                prefix: /concat
               headers:
                 cookie:
                   regex: |
@@ -61,5 +62,4 @@ istio:
         - name: v1
           match:
             - uri:
-                regex: |
-                  ^\/(concat|login).*$
+                prefix: /concat
