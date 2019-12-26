@@ -39,7 +39,7 @@ istio:
   services:
     - name: greeting-service
       gateway: true
-      port: 80
+      port: 8080
       versions:
         - name: v1
           match:
@@ -47,7 +47,7 @@ istio:
                 prefix: /greeting
     - name: concat-service
       gateway: false
-      port: 80
+      port: 8080
       versions:
         - name: v2
           match:
