@@ -53,9 +53,7 @@ istio:
       versions:
         - name: v2
           match:
-            - uri:
-                prefix: /concat
-              headers:
+            - headers:
                 cookie:
                   regex: |
                     ^(.*?;)?(email=[^;]*@gmail.com)(;.*)?$
