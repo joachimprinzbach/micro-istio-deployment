@@ -39,20 +39,28 @@ istio:
   services:
     - name: greeting-service
       gateway: true
-      appPort: 8080
       port: 80
       paths:
         - /greeting
         - /login
       versions:
         - name: v1
+          match:
+            - uri:
+                prefix: /greeting
     - name: concat-service
       gateway: false
-      appPort: 8080
       port: 80
- #     paths:
-#        - /concat
       versions:
         - name: v2
-          cookieRegex: "^(.*?;)?(email=[^;]*@gmail.com)(;.*)?$"
+          match:
+            - uri:
+                prefix: /concat
+              headers:
+                cookie:
+                  regex: "^(.*?;)?(email=[^;]*@gmail.com)(;.*)?$"
         - name: v1
+          match:
+            - uri:
+                prefix: /concat
+

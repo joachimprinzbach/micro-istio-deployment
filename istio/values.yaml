@@ -3,7 +3,6 @@ ingressGateway: ingressgateway
 services: []
 #  - name: service
 #    port: 80
-#    appPort: 8080
 #    selector:
 #      app: app-1
 #

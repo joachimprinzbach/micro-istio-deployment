@@ -12,8 +12,8 @@ metadata:
 spec:
     type: {{ default "ClusterIP" .type }}
     ports:
-        - port: {{ .appPort }}
-          targetPort: {{ .appPort }}
+        - port: {{ .port }}
+          targetPort: {{ .port }}
           name: http
     selector:
         app: {{ default .name .appName }}
@@ -35,24 +35,16 @@ spec:
   http:
 {{- $service := .}}
 {{- range $service.versions }}
+{{- if .match }}
     - match:
-{{- if $service.paths }}
-{{- range $service.paths }}
-        - uri:
-            prefix: {{ . }}
-{{- end }}
-{{- end }}
-{{- if .cookieRegex }}
-        - headers:
-            cookie:
-              regex: {{ .cookieRegex | quote }}
+{{ toYaml .match | indent 8 }}
 {{- end }}
       route:
           - destination:
               host: {{ $service.name }}
               subset: {{ .name }}
               port:
-                number: {{ $service.appPort }}
+                number: {{ $service.port }}
 {{- if .weight }}
             weight: {{ .weight }}
 {{- end }}
